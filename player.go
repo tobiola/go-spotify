@@ -41,6 +41,10 @@ func PlayTrack(accessToken string, track Track) error {
 	return nil
 }
 
+func PlayTracks(accessToken string, tracks []Track) error {
+	return errors.New("PlayTracks has not been implemented yet")
+}
+
 // Pause a User's Playback
 func Pause(accessToken string) error {
 	client := &http.Client{Timeout: time.Second * 5}
