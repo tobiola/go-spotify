@@ -10,12 +10,34 @@ import (
 	"time"
 )
 
+type Tracks struct {
+	Items []Track `json:"items"`
+}
+
+type Albums struct {
+	Items []AlbumSimple `json:"items"`
+}
+
+type Artists struct {
+	Items []ArtistSimple `json:"items"`
+}
+
+type Playlists struct {
+	Items []PlaylistSimple `json:"items"`
+}
+
+type SearchResponse struct {
+	Tracks  Tracks  `json:"tracks"`
+	Albums  Albums  `json:"albums"`
+	Artists Artists `json:"artists"`
+}
+
 // Search for an item
-func Search(accessToken string, query string) (SearchResult, error) {
+func Search(accessToken string, query string) (SearchResponse, error) {
 	params := make(url.Values)
 	params.Add("q", query)
 	params.Add("type", "track")
-	params.Add("limit", "7")
+	params.Add("limit", "20")
 
 	url := "https://api.spotify.com/v1/search?" + params.Encode()
 	client := &http.Client{Timeout: time.Second * 5}
@@ -33,7 +55,7 @@ func Search(accessToken string, query string) (SearchResult, error) {
 
 	bytes, err := ioutil.ReadAll(resp.Body)
 
-	result := SearchResult{}
+	result := SearchResponse{}
 	err = json.Unmarshal(bytes, &result)
 	if err != nil {
 		return result, err
