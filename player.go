@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strings"
 	"time"
+	"errors"
 )
 
 // Start/Resume a User's Playback

@@ -1,65 +1,65 @@
 package spotify
 
 type Album struct {
-	AlbumType            string         `json:"album_type"`
-	Artists              []ArtistSimple `json:"artists"`
-	AvailableMarkets     []string       `json:"available_markets"`
-	Copyrights           []Copyright    `json:"copyrights"`
-	ExternalIds          ExternalId     `json:"external_ids"`
-	ExternalUrls         ExternalUrl    `json:"external_urls"`
-	Genres               []string       `json:"genres"`
-	Href                 string         `json:"href"`
-	Id                   string         `json:"id"`
-	Images               []Image        `json:"images"`
-	Label                string         `json:"label"`
-	Name                 string         `json:"name"`
-	Popularity           int            `json:"popularity"`
-	ReleaseDate          string         `json:"release_date"`
-	ReleaseDatePrecision string         `json:"release_date_precision"`
-	Restrictions         Restrictions   `json:"restrictions"`
-	Tracks               []TrackSimple  `json:"tracks"`
-	Type                 string         `json:"type"`
-	Uri                  string         `json:"uri"`
+	AlbumType            string            `json:"album_type"`
+	Artists              []ArtistSimple    `json:"artists"`
+	AvailableMarkets     []string          `json:"available_markets"`
+	Copyrights           []Copyright       `json:"copyrights"`
+	ExternalIds          map[string]string `json:"external_ids"`
+	ExternalUrls         map[string]string `json:"external_urls"`
+	Genres               []string          `json:"genres"`
+	Href                 string            `json:"href"`
+	Id                   string            `json:"id"`
+	Images               []Image           `json:"images"`
+	Label                string            `json:"label"`
+	Name                 string            `json:"name"`
+	Popularity           int               `json:"popularity"`
+	ReleaseDate          string            `json:"release_date"`
+	ReleaseDatePrecision string            `json:"release_date_precision"`
+	Restrictions         Restrictions      `json:"restrictions"`
+	Tracks               []TrackSimple     `json:"tracks"`
+	Type                 string            `json:"type"`
+	Uri                  string            `json:"uri"`
 }
 
 type AlbumSimple struct {
-	AlbumGroup           string         `json:"album_group"`
-	AlbumType            string         `json:"album_type"`
-	Artists              []ArtistSimple `json:"artists"`
-	AvailableMarkets     []string       `json:"available_markets"`
-	ExternalUrls         ExternalUrl    `json:"external_url"`
-	Genres               []string       `json:"genres"`
-	Href                 string         `json:"href"`
-	Id                   string         `json:"id"`
-	Images               []Image        `json:"images"`
-	Name                 string         `json:"name"`
-	ReleaseDate          string         `json:"release_date"`
-	ReleaseDatePrecision string         `json:"release_date_precision"`
-	Restrictions         Restrictions   `json:"restrictions"`
-	Type                 string         `json:"type"`
-	Uri                  string         `json:"uri"`
+	AlbumGroup           string            `json:"album_group"`
+	AlbumType            string            `json:"album_type"`
+	Artists              []ArtistSimple    `json:"artists"`
+	AvailableMarkets     []string          `json:"available_markets"`
+	ExternalUrls         map[string]string `json:"external_url"`
+	Genres               []string          `json:"genres"`
+	Href                 string            `json:"href"`
+	Id                   string            `json:"id"`
+	Images               []Image           `json:"images"`
+	Name                 string            `json:"name"`
+	ReleaseDate          string            `json:"release_date"`
+	ReleaseDatePrecision string            `json:"release_date_precision"`
+	Restrictions         Restrictions      `json:"restrictions"`
+	Type                 string            `json:"type"`
+	Uri                  string            `json:"uri"`
 }
 
 type Artist struct {
-	ExternalUrls ExternalUrl `json:"external_url"`
-	Followers    Followers   `json:"followers"`
-	Genres       []string    `json:"genres"`
-	Href         string      `json:"href"`
-	Id           string      `json:"id"`
-	Images       []Image     `json:"images"`
-	Name         string      `json:"name"`
-	Popularity   int         `json:"popularity"`
-	Uri          string      `json:"uri"`
-	Type         string      `json:"type"`
+	ExternalUrls map[string]string `json:"external_url"`
+	Followers    Followers         `json:"followers"`
+	Genres       []string          `json:"genres"`
+	Href         string            `json:"href"`
+	Id           string            `json:"id"`
+	Images       []Image           `json:"images"`
+	Name         string            `json:"name"`
+	Popularity   int               `json:"popularity"`
+	Uri          string            `json:"uri"`
+	Type         string            `json:"type"`
 }
 
 type ArtistSimple struct {
-	ExternalUrls ExternalUrl `json:"external_url"`
-	Href         string      `json:"href"`
-	Id           string      `json:"id"`
-	Name         string      `json:"name"`
-	Uri          string      `json:"uri"`
-	Type         string      `json:"type"`
+	ExternalUrls map[string]string `json:"external_url"`
+	Href         string            `json:"href"`
+	Id           string            `json:"id"`
+	Name         string            `json:"name"`
+	Uri          string            `json:"uri"`
+	Type         string            `json:"type"`
 }
 
 type AudioFeatures struct {
@@ -91,10 +91,10 @@ type Category struct {
 }
 
 type Context struct {
-	Type         string      `json:"type"`
-	Href         string      `json:"href"`
-	ExternalUrls ExternalUrl `json:"external_urls"`
-	Uri          string      `json:"uri"`
+	Type         string            `json:"type"`
+	Href         string            `json:"href"`
+	ExternalUrls map[string]string `json:"external_urls"`
+	Uri          string            `json:"uri"`
 }
 
 type Copyright struct {
@@ -117,16 +117,6 @@ type PlayerError struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 	Reason  string `json:"reason"`
-}
-
-type ExternalId struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
-}
-
-type ExternalUrl struct {
-	Key   string `json:"key"`
-	Value string `json:"value"`
 }
 
 type Followers struct {
@@ -166,36 +156,36 @@ type PlayHistory struct {
 }
 
 type Playlist struct {
-	Collaborative bool        `json:"collaborative"`
-	Descriptions  string      `json:"descriptions"`
-	ExternalUrls  ExternalUrl `json:"external_urls"`
-	Followers     Followers   `json:"followers"`
-	Href          string      `json:"href"`
-	Id            string      `json:"id"`
-	Images        []Image     `json:"images"`
-	Name          string      `json:"name"`
-	Owner         User        `json:"owner"`
-	Public        bool        `json:"public"`
-	SnapshotId    string      `json:"snapshot_id"`
-	Tracks        Paging      `json:"tracks"`
-	Type          string      `json:"type"`
-	Uri           string      `json:"uri"`
+	Collaborative bool              `json:"collaborative"`
+	Descriptions  string            `json:"descriptions"`
+	ExternalUrls  map[string]string `json:"external_urls"`
+	Followers     Followers         `json:"followers"`
+	Href          string            `json:"href"`
+	Id            string            `json:"id"`
+	Images        []Image           `json:"images"`
+	Name          string            `json:"name"`
+	Owner         User              `json:"owner"`
+	Public        bool              `json:"public"`
+	SnapshotId    string            `json:"snapshot_id"`
+	Tracks        Paging            `json:"tracks"`
+	Type          string            `json:"type"`
+	Uri           string            `json:"uri"`
 }
 
 type PlaylistSimple struct {
-	Collaborative bool        `json:"collaborative"`
-	Descriptions  string      `json:"descriptions"`
-	ExternalUrls  ExternalUrl `json:"external_urls"`
-	Href          string      `json:"href"`
-	Id            string      `json:"id"`
-	Images        []Image     `json:"images"`
-	Name          string      `json:"name"`
-	Owner         User        `json:"owner"`
-	Public        bool        `json:"public"`
-	SnapshotId    string      `json:"snapshot_id"`
-	Tracks        Paging      `json:"tracks"`
-	Type          string      `json:"type"`
-	Uri           string      `json:"uri"`
+	Collaborative bool              `json:"collaborative"`
+	Descriptions  string            `json:"descriptions"`
+	ExternalUrls  map[string]string `json:"external_urls"`
+	Href          string            `json:"href"`
+	Id            string            `json:"id"`
+	Images        []Image           `json:"images"`
+	Name          string            `json:"name"`
+	Owner         User              `json:"owner"`
+	Public        bool              `json:"public"`
+	SnapshotId    string            `json:"snapshot_id"`
+	Tracks        Paging            `json:"tracks"`
+	Type          string            `json:"type"`
+	Uri           string            `json:"uri"`
 }
 
 type PlaylistTrack struct {
@@ -234,78 +224,78 @@ type SavedAlbum struct {
 type Timestamp string
 
 type Track struct {
-	Album            AlbumSimple    `json:"album"`
-	Artists          []ArtistSimple `json:"artists"`
-	AvailableMarkets []string       `json:"available_markets"`
-	DiscNumber       int            `json:"disc_number"`
-	DurationMs       int            `json:"duration_ms"`
-	Explicit         bool           `json:"explicit"`
-	ExternalIds      ExternalId     `json:"external_ids"`
-	Href             string         `json:"href"`
-	Id               string         `json:"id"`
-	IsPlayable       bool           `json:"is_playable"`
-	LinkedFrom       TrackLink      `json:"linked_from"`
-	Restrictions     Restrictions   `json:"restrictions"`
-	Name             string         `json:"name"`
-	Popularity       int            `json:"popularity"`
-	PreviewUrl       string         `json:"preview_url"`
-	TrackNumber      int            `json:"track_number"`
-	Type             string         `json:"type"`
-	Uri              string         `json:"uri"`
-	IsLocal          bool           `json:"is_local"`
+	Album            AlbumSimple       `json:"album"`
+	Artists          []ArtistSimple    `json:"artists"`
+	AvailableMarkets []string          `json:"available_markets"`
+	DiscNumber       int               `json:"disc_number"`
+	DurationMs       int               `json:"duration_ms"`
+	Explicit         bool              `json:"explicit"`
+	ExternalIds      map[string]string `json:"external_ids"`
+	Href             string            `json:"href"`
+	Id               string            `json:"id"`
+	IsPlayable       bool              `json:"is_playable"`
+	LinkedFrom       TrackLink         `json:"linked_from"`
+	Restrictions     Restrictions      `json:"restrictions"`
+	Name             string            `json:"name"`
+	Popularity       int               `json:"popularity"`
+	PreviewUrl       string            `json:"preview_url"`
+	TrackNumber      int               `json:"track_number"`
+	Type             string            `json:"type"`
+	Uri              string            `json:"uri"`
+	IsLocal          bool              `json:"is_local"`
 }
 
 type TrackSimple struct {
-	Artists          []ArtistSimple `json:"artists"`
-	AvailableMarkets []string       `json:"available_markets"`
-	DiscNumber       int            `json:"disc_number"`
-	DurationMs       int            `json:"duration_ms"`
-	Explicit         bool           `json:"explicit"`
-	ExternalIds      ExternalId     `json:"external_ids"`
-	Href             string         `json:"href"`
-	Id               string         `json:"id"`
-	IsPlayable       bool           `json:"is_playable"`
-	LinkedFrom       TrackLink      `json:"linked_from"`
-	Restrictions     Restrictions   `json:"restrictions"`
-	Name             string         `json:"name"`
-	PreviewUrl       string         `json:"preview_url"`
-	TrackNumber      int            `json:"track_number"`
-	Type             string         `json:"type"`
-	Uri              string         `json:"uri"`
-	IsLocal          bool           `json:"is_local"`
+	Artists          []ArtistSimple    `json:"artists"`
+	AvailableMarkets []string          `json:"available_markets"`
+	DiscNumber       int               `json:"disc_number"`
+	DurationMs       int               `json:"duration_ms"`
+	Explicit         bool              `json:"explicit"`
+	ExternalIds      map[string]string `json:"external_ids"`
+	Href             string            `json:"href"`
+	Id               string            `json:"id"`
+	IsPlayable       bool              `json:"is_playable"`
+	LinkedFrom       TrackLink         `json:"linked_from"`
+	Restrictions     Restrictions      `json:"restrictions"`
+	Name             string            `json:"name"`
+	PreviewUrl       string            `json:"preview_url"`
+	TrackNumber      int               `json:"track_number"`
+	Type             string            `json:"type"`
+	Uri              string            `json:"uri"`
+	IsLocal          bool              `json:"is_local"`
 }
 
 type TrackLink struct {
-	ExternalUrls ExternalUrl `json:"external_urls"`
-	Href         string      `json:"href"`
-	Id           string      `json:"id"`
-	Type         string      `json:"type"`
-	Uri          string      `json:"uri"`
+	ExternalUrls map[string]string `json:"external_urls"`
+	Href         string            `json:"href"`
+	Id           string            `json:"id"`
+	Type         string            `json:"type"`
+	Uri          string            `json:"uri"`
 }
 
 type User struct {
-	DisplayName  string      `json:"display_name"`
-	ExternalUrls ExternalUrl `json:"external_urls"`
-	Followers    Followers   `json:"followers"`
-	Href         string      `json:"href"`
-	Id           string      `json:"id"`
-	Images       []Image     `json:"images"`
-	Type         string      `json:"type"`
-	Uri          string      `json:"uri"`
+	DisplayName  string            `json:"display_name"`
+	ExternalUrls map[string]string `json:"external_urls"`
+	Followers    Followers         `json:"followers"`
+	Href         string            `json:"href"`
+	Id           string            `json:"id"`
+	Images       []Image           `json:"images"`
+	Type         string            `json:"type"`
+	Uri          string            `json:"uri"`
 }
 
 type UserPrivate struct {
-	Country      string      `json:"country"`
-	DisplayName  string      `json:"display_name"`
-	Email        string      `json:"email"`
-	ExternalUrls ExternalUrl `json:"external_urls"`
-	Followers    Followers   `json:"followers"`
-	Href         string      `json:"href"`
-	Id           string      `json:"id"`
-	Images       []Image     `json:"images"`
-	Product      string      `json:"product"`
-	Type         string      `json:"type"`
-	Uri          string      `json:"uri"`
+	Country      string            `json:"country"`
+	DisplayName  string            `json:"display_name"`
+	Email        string            `json:"email"`
+	ExternalUrls map[string]string `json:"external_urls"`
+	Followers    Followers         `json:"followers"`
+	Href         string            `json:"href"`
+	Id           string            `json:"id"`
+	Images       []Image           `json:"images"`
+	Product      string            `json:"product"`
+	Type         string            `json:"type"`
+	Uri          string            `json:"uri"`
 }
 
 type State struct {
