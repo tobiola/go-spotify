@@ -1,10 +1,10 @@
 package spotify
 
 import (
-	"time"
-	"strings"
 	"fmt"
 	"net/http"
+	"strings"
+	"time"
 )
 
 // Start/Resume a User's Playback
@@ -15,7 +15,7 @@ func Play(accessToken string) error {
 		return err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
-	
+
 	_, err = client.Do(request)
 	if err != nil {
 		return err
@@ -32,7 +32,7 @@ func PlayTrack(accessToken string, track Track) error {
 		return err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
-	
+
 	_, err = client.Do(request)
 	if err != nil {
 		return err
@@ -49,7 +49,7 @@ func Pause(accessToken string) error {
 		return err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
-	
+
 	_, err = client.Do(request)
 	if err != nil {
 		return err

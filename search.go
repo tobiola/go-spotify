@@ -1,13 +1,13 @@
 package spotify
 
 import (
-	"fmt"
-	"log"
-	"time"
-	"io/ioutil"
-	"net/url"
-	"net/http"
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/url"
+	"time"
 )
 
 // Search for an item
@@ -16,7 +16,7 @@ func Search(accessToken string, query string) (SearchResult, error) {
 	params.Add("q", query)
 	params.Add("type", "track")
 	params.Add("limit", "7")
-	
+
 	url := "https://api.spotify.com/v1/search?" + params.Encode()
 	client := &http.Client{Timeout: time.Second * 5}
 	request, err := http.NewRequest("GET", url, nil)

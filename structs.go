@@ -1,3 +1,4 @@
+// This package contains spotify structs and wrappers for network requests
 package spotify
 
 type Artist struct {
@@ -52,10 +53,10 @@ type Playlists struct {
 */
 
 type SearchResult struct {
-	Tracks Tracks `json:"tracks"`
-	Albums Albums `json:"albums"`
+	Tracks  Tracks  `json:"tracks"`
+	Albums  Albums  `json:"albums"`
 	Artists Artists `json:"artists"`
-//	Playlists Playlists `json:"playlists"`
+	//	Playlists Playlists `json:"playlists"`
 }
 
 type State struct {
