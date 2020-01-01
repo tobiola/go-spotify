@@ -34,6 +34,8 @@ type SearchResponse struct {
 
 // Search for an item
 func Search(accessToken string, query string) (SearchResponse, error) {
+	result := SearchResponse{}
+
 	params := make(url.Values)
 	params.Add("q", query)
 	params.Add("type", "track")
@@ -43,19 +45,18 @@ func Search(accessToken string, query string) (SearchResponse, error) {
 	client := &http.Client{Timeout: time.Second * 5}
 	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		log.Fatalln(err)
+		return result, err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
 
 	resp, err := client.Do(request)
 	if err != nil {
-		log.Fatalln(err)
+		return result, err
 	}
 	defer resp.Body.Close()
 
 	bytes, err := ioutil.ReadAll(resp.Body)
 
-	result := SearchResponse{}
 	err = json.Unmarshal(bytes, &result)
 	if err != nil {
 		return result, err
