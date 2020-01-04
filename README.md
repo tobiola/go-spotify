@@ -11,7 +11,7 @@
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
  	scope := "streaming user-read-private user-read-email user-modify-playback-state"
 	clientId := "[Client ID Here]"
-	clientId := "[Client Secret Here]"
+	clientSecret := "[Client Secret Here]"
  	redirectUri := "[URL that should handle the callback]"
 
  	redirectLink, _ := spotify.GetRedirectLink(redirectURI, clientId, scope)
@@ -21,7 +21,7 @@ func HandleLogin(w http.ResponseWriter, r *http.Request) {
 
 func HandleCallback(w http.ResponseWriter, r *http.Request) {
 	clientId := "[Client ID Here]"
-	clientId := "[Client Secret Here]"
+	clientSecret := "[Client Secret Here]"
  	redirectUri := "[URL that should handle the callback]"
 
 	account, _ := spotify.GetAccountFromCallback(r.URL, redirectURI, clientID, clientSecret)
