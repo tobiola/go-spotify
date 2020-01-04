@@ -1,19 +1,21 @@
-# Golang Spotify API Wrapper
+# Spotify API Wrapper - Golang
 
 ## Getting started
 
+### Authentication
+
 ````Go
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
-  scope := "streaming user-read-private user-read-email user-modify-playback-state"
-  clientId = "[Your Client ID Here]"
-  redirectUri = "[Your url that should handle the callback]"
+ 	scope := "streaming user-read-private user-read-email user-modify-playback-state"
+ 	clientId = "[Your Client ID Here]"
+ 	redirectUri = "[Your url that should handle the callback]"
 
-  redirectLink, err := spotify.GetRedirectLink(s.RedirectURI, clientId, scope)
-  if err != nil {
-    log.Fatalln(err)
-  }
+ 	redirectLink, err := spotify.GetRedirectLink(s.RedirectURI, clientId, scope)
+ 	if err != nil {
+   		log.Fatalln(err)
+ 	}
 
-  http.Redirect(w, r, redirectLink, http.StatusSeeOther)
+ 	http.Redirect(w, r, redirectLink, http.StatusSeeOther)
 }
 
 func HandleCallback(w http.ResponseWriter, r *http.Request) {
@@ -25,4 +27,14 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 	accessToken := tokens.AccessToken
 	refreshToken := tokens.RefreshToken
 }
+````
+
+### Player
+
+````Go
+// Play 
+spotify.Pause(accessToken)
+
+// Pause
+spotify.Play(accessToken)
 ````
