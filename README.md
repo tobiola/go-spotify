@@ -2,7 +2,7 @@
 
 ## Getting started
 
-```
+````Go
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
   scope := "streaming user-read-private user-read-email user-modify-playback-state"
   clientId = "[Your Client ID Here]"
@@ -25,4 +25,4 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 	accessToken := tokens.AccessToken
 	refreshToken := tokens.RefreshToken
 }
-```
+````
