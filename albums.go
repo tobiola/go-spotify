@@ -1,6 +1,14 @@
 package spotify
 
-func (a Account) GetAlbum(string albumId) (Album, error) {
+import (
+	"fmt"
+	"time"
+	"io/ioutil"
+	"encoding/json"
+	"net/http"
+)
+
+func (a Account) GetAlbum(albumId string) (Album, error) {
 	album := Album{}
 
 	/*
@@ -34,7 +42,7 @@ func (a Account) GetAlbum(string albumId) (Album, error) {
 	return album, nil
 }
 
-func (a Account) GetAlbumTracks(string albumId) (TrackPaging, error) {
+func (a Account) GetAlbumTracks(albumId string) (TrackPaging, error) {
 	tracks := TrackPaging{}
 
 	/*
@@ -48,7 +56,7 @@ func (a Account) GetAlbumTracks(string albumId) (TrackPaging, error) {
 	client := &http.Client{Timeout: time.Second * 5}
 	request, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return album, err
+		return tracks, err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", a.AccessToken))
 
