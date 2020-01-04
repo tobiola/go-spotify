@@ -3,7 +3,7 @@
 ## Getting started
 
 ### Official Spotfy API
-[Spotify API](https://developer.spotify.com/documentation/web-api/)
+[https://developer.spotify.com/documentation/web-api/](https://developer.spotify.com/documentation/web-api/)
 
 ### Authentication
 
@@ -46,5 +46,5 @@ account.Pause()
 
 ````Go
 result, _ := accout.Search("bangers")
-account.Play(accessToken, result.Tracks.Items[0])
+account.Play(result.Tracks.Items[0])
 ````
