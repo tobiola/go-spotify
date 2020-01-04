@@ -1,5 +1,6 @@
 package spotify
 
+// TODO: Add Description
 type Album struct {
 	AlbumType            string            `json:"album_type"`
 	Artists              []ArtistSimple    `json:"artists"`
@@ -22,6 +23,10 @@ type Album struct {
 	Uri                  string            `json:"uri"`
 }
 
+// TODO: Add Description
+// TODO: Add Description
+// TODO: Add Description
+// TODO: Add Description
 type AlbumSimple struct {
 	AlbumGroup           string            `json:"album_group"`
 	AlbumType            string            `json:"album_type"`
@@ -40,6 +45,7 @@ type AlbumSimple struct {
 	Uri                  string            `json:"uri"`
 }
 
+// TODO: Add Description
 type Artist struct {
 	ExternalUrls map[string]string `json:"external_url"`
 	Followers    Followers         `json:"followers"`
@@ -53,6 +59,7 @@ type Artist struct {
 	Type         string            `json:"type"`
 }
 
+// TODO: Add Description
 type ArtistSimple struct {
 	ExternalUrls map[string]string `json:"external_url"`
 	Href         string            `json:"href"`
@@ -62,6 +69,7 @@ type ArtistSimple struct {
 	Type         string            `json:"type"`
 }
 
+// TODO: Add Description
 type AudioFeatures struct {
 	Acousticness     float32 `json:"acousticness"`
 	AnalysisUrl      string  `json:"analysis_url"`
@@ -83,6 +91,7 @@ type AudioFeatures struct {
 	Valence          float32 `json:"valence"`
 }
 
+// TODO: Add Description
 type Category struct {
 	Href  string  `json:"href"`
 	Icons []Image `json:"icons"`
@@ -90,6 +99,7 @@ type Category struct {
 	Name  string  `json:"name"`
 }
 
+// TODO: Add Description
 type Context struct {
 	Type         string            `json:"type"`
 	Href         string            `json:"href"`
@@ -97,39 +107,47 @@ type Context struct {
 	Uri          string            `json:"uri"`
 }
 
+// TODO: Add Description
 type Copyright struct {
 	Text string `json:"text"`
 	Type string `json:"type"`
 }
 
+// TODO: Add Description
 type Cursor struct {
 	After string `json:"after"`
 }
 
+// TODO: Add Description
 type Disallows string
 
+// TODO: Add Description
 type Error struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 }
 
+// TODO: Add Description
 type PlayerError struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 	Reason  string `json:"reason"`
 }
 
+// TODO: Add Description
 type Followers struct {
 	Href  string `json:"href"`
 	Total int    `json:"total"`
 }
 
+// TODO: Add Description
 type Image struct {
 	Height int    `json:"height"`
 	Url    string `json:"url"`
 	Width  int    `json:"width"`
 }
 
+// TODO: Add Description
 type Paging struct {
 	Href     string      `json:"href"`
 	Items    interface{} `json:"items"`
@@ -140,6 +158,7 @@ type Paging struct {
 	Total    int         `json:"total"`
 }
 
+// TODO: Add Description
 type TrackPaging struct {
 	Href     string  `json:"href"`
 	Items    []Track `json:"items"`
@@ -150,6 +169,7 @@ type TrackPaging struct {
 	Total    int     `json:"total"`
 }
 
+// TODO: Add Description
 type AlbumPaging struct {
 	Href     string        `json:"href"`
 	Items    []AlbumSimple `json:"items"`
@@ -160,6 +180,7 @@ type AlbumPaging struct {
 	Total    int           `json:"total"`
 }
 
+// TODO: Add Description
 type ArtistPaging struct {
 	Href     string   `json:"href"`
 	Items    []Artist `json:"items"`
@@ -170,6 +191,7 @@ type ArtistPaging struct {
 	Total    int      `json:"total"`
 }
 
+// TODO: Add Description
 type PlaylistPaging struct {
 	Href     string           `json:"href"`
 	Items    []PlaylistSimple `json:"items"`
@@ -180,6 +202,7 @@ type PlaylistPaging struct {
 	Total    int              `json:"total"`
 }
 
+// TODO: Add Description
 type CursorBasedPaging struct {
 	Href    string      `json:"href"`
 	Items   interface{} `json:"items"`
@@ -189,12 +212,14 @@ type CursorBasedPaging struct {
 	Total   int         `json:"total"`
 }
 
+// TODO: Add Description
 type PlayHistory struct {
 	Track    TrackSimple `json:"track"`
 	PlayedAt Timestamp   `json:"played_at"`
 	Context  Context     `json:"context"`
 }
 
+// TODO: Add Description
 type Playlist struct {
 	Collaborative bool              `json:"collaborative"`
 	Descriptions  string            `json:"descriptions"`
@@ -212,6 +237,7 @@ type Playlist struct {
 	Uri           string            `json:"uri"`
 }
 
+// TODO: Add Description
 type PlaylistSimple struct {
 	Collaborative bool              `json:"collaborative"`
 	Descriptions  string            `json:"descriptions"`
@@ -228,6 +254,7 @@ type PlaylistSimple struct {
 	Uri           string            `json:"uri"`
 }
 
+// TODO: Add Description
 type PlaylistTrack struct {
 	AddedAt Timestamp `json:"added_at"`
 	AddedBy User      `json:"added_by"`
@@ -235,11 +262,13 @@ type PlaylistTrack struct {
 	Track   Track     `json:"track"`
 }
 
+// TODO: Add Description
 type Recommendations struct {
 	Seeds  []RecommendationSeed `json:"seeds"`
 	Tracks []TrackSimple        `json:"tracks"`
 }
 
+// TODO: Add Description
 type RecommendationSeed struct {
 	AfterFilteringSize int    `json:"after_filtering_size"`
 	AfterRelinkingSize int    `json:"after_relinking_size"`
@@ -249,20 +278,25 @@ type RecommendationSeed struct {
 	Type               string `json:"type"`
 }
 
+// TODO: Add Description
 type Restrictions interface{}
 
+// TODO: Add Description
 type SavedTrack struct {
 	AddedAt Timestamp `json:"added_at"`
 	Track   Track     `json:"track"`
 }
 
+// TODO: Add Description
 type SavedAlbum struct {
 	AddedAt Timestamp `json:"added_at"`
 	Album   Album     `json:"album"`
 }
 
+// TODO: Add Description
 type Timestamp string
 
+// TODO: Add Description
 type Track struct {
 	Album            AlbumSimple       `json:"album"`
 	Artists          []ArtistSimple    `json:"artists"`
@@ -285,6 +319,7 @@ type Track struct {
 	IsLocal          bool              `json:"is_local"`
 }
 
+// TODO: Add Description
 type TrackSimple struct {
 	Artists          []ArtistSimple    `json:"artists"`
 	AvailableMarkets []string          `json:"available_markets"`
@@ -305,6 +340,7 @@ type TrackSimple struct {
 	IsLocal          bool              `json:"is_local"`
 }
 
+// TODO: Add Description
 type TrackLink struct {
 	ExternalUrls map[string]string `json:"external_urls"`
 	Href         string            `json:"href"`
@@ -313,6 +349,7 @@ type TrackLink struct {
 	Uri          string            `json:"uri"`
 }
 
+// TODO: Add Description
 type User struct {
 	DisplayName  string            `json:"display_name"`
 	ExternalUrls map[string]string `json:"external_urls"`
@@ -324,6 +361,7 @@ type User struct {
 	Uri          string            `json:"uri"`
 }
 
+// TODO: Add Description
 type UserPrivate struct {
 	Country      string            `json:"country"`
 	DisplayName  string            `json:"display_name"`
@@ -338,6 +376,7 @@ type UserPrivate struct {
 	Uri          string            `json:"uri"`
 }
 
+// TODO: Add Description
 type State struct {
 	CurrentTrack Track `json:"currentTrack"`
 	Position     int   `json:"position"`
