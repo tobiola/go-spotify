@@ -33,8 +33,8 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 ````Go
 // Play 
-spotify.Pause(accessToken)
+spotify.Play(accessToken)
 
 // Pause
-spotify.Play(accessToken)
+spotify.Pause(accessToken)
 ````
