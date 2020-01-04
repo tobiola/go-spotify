@@ -38,3 +38,15 @@ spotify.Play(accessToken)
 // Pause
 spotify.Pause(accessToken)
 ````
+
+### Search
+
+````Go
+query := "bangers"
+result, err := spotify.Search(accessToken, query)
+if err != nil {
+	log.Fatalln(err)
+}
+	
+spotify.Play(accessToken, result.Tracks.Items[0])
+````
