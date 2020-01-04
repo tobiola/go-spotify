@@ -45,8 +45,6 @@ account.Pause()
 ### Search
 
 ````Go
-query := "bangers"
-result, _ := accout.Search(accessToken, query)
-
+result, _ := accout.Search("bangers")
 account.Play(accessToken, result.Tracks.Items[0])
 ````
