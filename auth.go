@@ -1,22 +1,16 @@
 package spotify
 
 import (
-	"net/url"
-	"math/rand"
-	"net/http"
-	"time"
-	"fmt"
 	"encoding/base64"
 	"encoding/json"
-	"strings"
 	"errors"
-
+	"fmt"
+	"math/rand"
+	"net/http"
+	"net/url"
+	"strings"
+	"time"
 )
-
-type Tokens struct {
-	AccessToken  string
-	RefreshToken string
-}
 
 func generateRandomString(n int) string {
 	randomString := make([]rune, n)
@@ -51,20 +45,20 @@ func GetRedirectLink(callbackUrl string, clientId string, scope string) (string,
 	return redirectLink.String(), nil
 }
 
-func GetTokensFromCallback(requestUrl *url.URL, redirectUri string, clientId string, clientSecret string) (Tokens, error) {
-	tokens := Tokens{}
+func GetAccountFromCallback(requestUrl *url.URL, redirectUri string, clientId string, clientSecret string) (Account, error) {
+	account := Account{}
 	code := requestUrl.Query().Get("code")
 	// state := requestUrl.Query().Get("state")
 
 	/*
-	storedStateCookie, err := r.Cookie("spotify_auth_state")
-	storedState := storedStateCookie.Value
+		storedStateCookie, err := r.Cookie("spotify_auth_state")
+		storedState := storedStateCookie.Value
 
-	if state != storedState {
-		return tokens, errors.New("Auth State Mismatch Error")
-	}
+		if state != storedState {
+			return account, errors.New("Auth State Mismatch Error")
+		}
 
-	http.SetCookie(w, &http.Cookie{Name: "spotify_auth_state", Value: "", Expires: time.Now()})
+		http.SetCookie(w, &http.Cookie{Name: "spotify_auth_state", Value: "", Expires: time.Now()})
 	*/
 
 	client := &http.Client{Timeout: time.Second * 5}
@@ -72,25 +66,25 @@ func GetTokensFromCallback(requestUrl *url.URL, redirectUri string, clientId str
 
 	request, err := http.NewRequest("POST", "https://accounts.spotify.com/api/token", strings.NewReader(form.Encode()))
 	if err != nil {
-		return tokens, err
+		return account, err
 	}
 	request.Header.Add("Content-type", "application/x-www-form-urlencoded")
 	request.Header.Add("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", clientId, clientSecret)))))
 
 	resp, err := client.Do(request)
 	if err != nil {
-		return tokens, err
+		return account, err
 	}
 	defer resp.Body.Close()
 
 	var result map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
-		return tokens, err
+		return account, err
 	}
 
 	if resp.StatusCode != 200 {
-		return tokens, errors.New("Invalid Request")
+		return account, errors.New("Invalid Request")
 	}
 
 	/*
@@ -101,9 +95,11 @@ func GetTokensFromCallback(requestUrl *url.URL, redirectUri string, clientId str
 		request.Header.Set("Authorization", fmt.Sprintf("Bearer %v", result["access_token"]))
 	*/
 
-	tokens.AccessToken = fmt.Sprintf("%v", result["access_token"])
-	tokens.RefreshToken = fmt.Sprintf("%v", result["refresh_token"])
-	return tokens, nil
+	account.AccessToken = fmt.Sprintf("%v", result["access_token"])
+	account.RefreshToken = fmt.Sprintf("%v", result["refresh_token"])
+	account.ClientId = clientId
+	account.ClientSecret = clientSecret
+	return account, nil
 }
 
 func GetAccessTokenFromRefreshToken(refreshToken string, clientId string, clientSecret string) (string, error) {
@@ -132,4 +128,14 @@ func GetAccessTokenFromRefreshToken(refreshToken string, clientId string, client
 
 	accessToken = fmt.Sprintf("%s", result["access_token"])
 	return accessToken, nil
+}
+
+func (a Account) RefreshAccessToken() error {
+	accessToken, err := GetAccessTokenFromRefreshToken(a.RefreshToken, a.ClientId, a.ClientSecret)
+	if err != nil {
+		return err
+	}
+
+	a.AccessToken = accessToken
+	return nil
 }

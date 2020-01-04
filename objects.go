@@ -140,6 +140,46 @@ type Paging struct {
 	Total    int         `json:"total"`
 }
 
+type TrackPaging struct {
+	Href     string  `json:"href"`
+	Items    []Track `json:"items"`
+	Limit    int     `json:"limit"`
+	Next     string  `json:"next"`
+	Offset   int     `json:"offset"`
+	Previous string  `json:"previous"`
+	Total    int     `json:"total"`
+}
+
+type AlbumPaging struct {
+	Href     string        `json:"href"`
+	Items    []AlbumSimple `json:"items"`
+	Limit    int           `json:"limit"`
+	Next     string        `json:"next"`
+	Offset   int           `json:"offset"`
+	Previous string        `json:"previous"`
+	Total    int           `json:"total"`
+}
+
+type ArtistPaging struct {
+	Href     string   `json:"href"`
+	Items    []Artist `json:"items"`
+	Limit    int      `json:"limit"`
+	Next     string   `json:"next"`
+	Offset   int      `json:"offset"`
+	Previous string   `json:"previous"`
+	Total    int      `json:"total"`
+}
+
+type PlaylistPaging struct {
+	Href     string           `json:"href"`
+	Items    []PlaylistSimple `json:"items"`
+	Limit    int              `json:"limit"`
+	Next     string           `json:"next"`
+	Offset   int              `json:"offset"`
+	Previous string           `json:"previous"`
+	Total    int              `json:"total"`
+}
+
 type CursorBasedPaging struct {
 	Href    string      `json:"href"`
 	Items   interface{} `json:"items"`
