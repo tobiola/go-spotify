@@ -1,11 +1,11 @@
 package spotify
 
 import (
-	"io"
 	"fmt"
-	"time"
-	"net/http"
+	"io"
 	"io/ioutil"
+	"net/http"
+	"time"
 )
 
 type Client struct {

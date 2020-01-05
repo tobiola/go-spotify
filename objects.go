@@ -106,12 +106,16 @@ type Cursor struct {
 	After string `json:"after"`
 }
 
-type Disallows string
+type Disallows map[string]string
 
 type Error struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 }
+
+type ExternalUrls map[string]string
+
+type ExternalIds map[string]string
 
 type PlayerError struct {
 	Status  int    `json:"status"`
@@ -187,12 +191,6 @@ type CursorBasedPaging struct {
 	Next    string      `json:"next"`
 	Cursors Cursor      `json:"cursors"`
 	Total   int         `json:"total"`
-}
-
-type PlayHistory struct {
-	Track    TrackSimple `json:"track"`
-	PlayedAt Timestamp   `json:"played_at"`
-	Context  Context     `json:"context"`
 }
 
 type Playlist struct {
