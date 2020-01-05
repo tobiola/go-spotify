@@ -52,3 +52,16 @@ client.Pause()
 result, _ := accout.Search("bangers")
 client.Play(result.Tracks.Items[0])
 ````
+
+### Progress
+- [x] Authentication
+- [x] Albums
+- [ ] Browse
+- [ ] Follow
+- [ ] Library
+- [ ] Personalization
+- [ ] Player
+- [ ] Playlists
+- [x] Search
+- [ ] Tracks
+- [ ] Users Profile
