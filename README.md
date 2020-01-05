@@ -49,7 +49,7 @@ client.Pause()
 ### Search
 
 ````Go
-result, _ := accout.Search("bangers")
+result, _ := client.Search("bangers")
 client.Play(result.Tracks.Items[0])
 ````
 
