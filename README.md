@@ -15,23 +15,20 @@ go get github.com/tobiola/Spotify
 ### Authentication
 
 ````Go
+clientId := "[Client ID Here]"
+clientSecret := "[Client Secret Here]"
+redirectUri := "[URL that should handle the callback]"
+
 func HandleLogin(w http.ResponseWriter, r *http.Request) {
  	scope := "streaming user-read-private user-read-email user-modify-playback-state"
-	clientId := "[Client ID Here]"
-	clientSecret := "[Client Secret Here]"
- 	redirectUri := "[URL that should handle the callback]"
 
- 	redirectLink, _ := spotify.GetRedirectLink(redirectURI, clientId, scope)
+ 	redirectLink, _ := spotify.GetRedirectLink(redirectUri, clientId, scope)
 
  	http.Redirect(w, r, redirectLink, http.StatusSeeOther)
 }
 
 func HandleCallback(w http.ResponseWriter, r *http.Request) {
-	clientId := "[Client ID Here]"
-	clientSecret := "[Client Secret Here]"
- 	redirectUri := "[URL that should handle the callback]"
-
-	account, _ := spotify.GetAccountFromCallback(r.URL, redirectURI, clientID, clientSecret)
+	client, _ := spotify.GetClientFromCallback(r.URL, redirectUri, clientId, clientSecret)
 }
 ````
 
@@ -39,19 +36,19 @@ func HandleCallback(w http.ResponseWriter, r *http.Request) {
 
 ````Go
 // Play 
-account.Play()
+client.Play()
 // or
-account.PlayTrack(track)
+client.PlayTrack(track)
 // or
-account.PlayTracks(tracks)
+client.PlayTracks(tracks)
 
 // Pause
-account.Pause()
+client.Pause()
 ````
 
 ### Search
 
 ````Go
 result, _ := accout.Search("bangers")
-account.Play(result.Tracks.Items[0])
+client.Play(result.Tracks.Items[0])
 ````

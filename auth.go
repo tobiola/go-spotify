@@ -45,8 +45,8 @@ func GetRedirectLink(callbackUrl string, clientId string, scope string) (string,
 	return redirectLink.String(), nil
 }
 
-func GetAccountFromCallback(requestUrl *url.URL, redirectUri string, clientId string, clientSecret string) (Account, error) {
-	account := Account{}
+func GetClientFromCallback(requestUrl *url.URL, redirectUri string, clientId string, clientSecret string) (Client, error) {
+	c := Client{}
 	code := requestUrl.Query().Get("code")
 	// state := requestUrl.Query().Get("state")
 
@@ -66,25 +66,25 @@ func GetAccountFromCallback(requestUrl *url.URL, redirectUri string, clientId st
 
 	request, err := http.NewRequest("POST", "https://accounts.spotify.com/api/token", strings.NewReader(form.Encode()))
 	if err != nil {
-		return account, err
+		return c, err
 	}
 	request.Header.Add("Content-type", "application/x-www-form-urlencoded")
 	request.Header.Add("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", clientId, clientSecret)))))
 
 	resp, err := client.Do(request)
 	if err != nil {
-		return account, err
+		return c, err
 	}
 	defer resp.Body.Close()
 
 	var result map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
-		return account, err
+		return c, err
 	}
 
 	if resp.StatusCode != 200 {
-		return account, errors.New("Invalid Request")
+		return c, errors.New("Invalid Request")
 	}
 
 	/*
@@ -95,11 +95,11 @@ func GetAccountFromCallback(requestUrl *url.URL, redirectUri string, clientId st
 		request.Header.Set("Authorization", fmt.Sprintf("Bearer %v", result["access_token"]))
 	*/
 
-	account.AccessToken = fmt.Sprintf("%v", result["access_token"])
-	account.RefreshToken = fmt.Sprintf("%v", result["refresh_token"])
-	account.ClientId = clientId
-	account.ClientSecret = clientSecret
-	return account, nil
+	c.AccessToken = fmt.Sprintf("%v", result["access_token"])
+	c.RefreshToken = fmt.Sprintf("%v", result["refresh_token"])
+	c.ClientId = clientId
+	c.ClientSecret = clientSecret
+	return c, nil
 }
 
 func GetAccessTokenFromRefreshToken(refreshToken string, clientId string, clientSecret string) (string, error) {
@@ -130,12 +130,12 @@ func GetAccessTokenFromRefreshToken(refreshToken string, clientId string, client
 	return accessToken, nil
 }
 
-func (a Account) RefreshAccessToken() error {
-	accessToken, err := GetAccessTokenFromRefreshToken(a.RefreshToken, a.ClientId, a.ClientSecret)
+func (c *Client) RefreshAccessToken() error {
+	accessToken, err := GetAccessTokenFromRefreshToken(c.RefreshToken, c.ClientId, c.ClientSecret)
 	if err != nil {
 		return err
 	}
 
-	a.AccessToken = accessToken
+	c.AccessToken = accessToken
 	return nil
 }

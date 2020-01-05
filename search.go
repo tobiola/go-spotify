@@ -2,12 +2,7 @@ package spotify
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	//	"log"
-	"net/http"
 	"net/url"
-	"time"
 )
 
 /*
@@ -36,7 +31,7 @@ type SearchResponse struct {
 }
 
 // Search for an item
-func (a Account) Search(query string) (SearchResponse, error) {
+func (c *Client) Search(query string) (SearchResponse, error) {
 	result := SearchResponse{}
 
 	params := make(url.Values)
@@ -45,20 +40,11 @@ func (a Account) Search(query string) (SearchResponse, error) {
 	params.Add("limit", "20")
 
 	url := "https://api.spotify.com/v1/search?" + params.Encode()
-	client := &http.Client{Timeout: time.Second * 5}
-	request, err := http.NewRequest("GET", url, nil)
+
+	bytes, err := c.get(url, nil)
 	if err != nil {
 		return result, err
 	}
-	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", a.AccessToken))
-
-	resp, err := client.Do(request)
-	if err != nil {
-		return result, err
-	}
-	defer resp.Body.Close()
-
-	bytes, err := ioutil.ReadAll(resp.Body)
 
 	err = json.Unmarshal(bytes, &result)
 	if err != nil {
