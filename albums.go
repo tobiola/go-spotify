@@ -7,13 +7,6 @@ import (
 func (c *Client) GetAlbum(albumId string) (Album, error) {
 	album := Album{}
 
-	/*
-		params := make(url.Values)
-		params.Add("q", query)
-		params.Add("type", "track")
-		params.Add("limit", "20")
-	*/
-
 	url := "https://api.spotify.com/v1/albums/" + albumId
 	bytes, err := c.get(url, nil)
 	if err != nil {

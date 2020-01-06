@@ -3,6 +3,8 @@ package spotify
 import (
 	"fmt"
 	"io"
+	"errors"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -32,20 +34,33 @@ func (c *Client) delete(url string, body io.Reader) ([]byte, error) {
 }
 
 func (c *Client) fetch(method string, url string, body io.Reader) ([]byte, error) {
-	bytes := []byte{}
-
 	client := &http.Client{Timeout: time.Second * 5}
 	request, err := http.NewRequest(method, url, body)
 	if err != nil {
-		return bytes, err
+		return []byte{}, err
 	}
 	request.Header.Add("Authorization", fmt.Sprintf("Bearer %s", c.AccessToken))
 
 	resp, err := client.Do(request)
 	if err != nil {
-		return bytes, err
+		return []byte{}, err
 	}
 	defer resp.Body.Close()
 
-	return ioutil.ReadAll(resp.Body)
+	bytes, err := ioutil.ReadAll(resp.Body) 
+	if err != nil {
+		return []byte{}, err
+	}
+
+	var result map[string]interface{}
+	err = json.Unmarshal(bytes, &result)
+	if err != nil {
+		return []byte{}, err
+	}
+
+	if result["error"] != nil {
+		return []byte{}, errors.New(fmt.Sprintf("%s", result["error_description"]))
+	}
+
+	return bytes, nil
 }

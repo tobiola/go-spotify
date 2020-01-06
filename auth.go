@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+//	"log"
 	"time"
 )
 
@@ -31,7 +32,7 @@ func GetRedirectLink(callbackUrl string, clientId string, scope string) (string,
 
 	redirectLink, err := url.Parse("https://accounts.spotify.com/authorize")
 	if err != nil {
-		return "", nil
+		return "", err
 	}
 
 	params := url.Values{}
@@ -86,6 +87,7 @@ func GetClientFromCallback(requestUrl *url.URL, redirectUri string, clientId str
 	if resp.StatusCode != 200 {
 		return c, errors.New("Invalid Request")
 	}
+	
 
 	/*
 		request, err = http.NewRequest("GET", "https://api.spotify.com/v1/me", strings.NewReader(url.Values{}.Encode()))
@@ -103,30 +105,33 @@ func GetClientFromCallback(requestUrl *url.URL, redirectUri string, clientId str
 }
 
 func GetAccessTokenFromRefreshToken(refreshToken string, clientId string, clientSecret string) (string, error) {
-	accessToken := ""
 	client := &http.Client{Timeout: time.Second * 5}
-	form := url.Values{"refresh_token": {refreshToken}, "grant_type": {"authorization_code"}}
+	form := url.Values{"refresh_token": {refreshToken}, "grant_type": {"refresh_token"}}
 
 	request, err := http.NewRequest("POST", "https://accounts.spotify.com/api/token", strings.NewReader(form.Encode()))
 	if err != nil {
-		return accessToken, err
+		return "", err
 	}
 	request.Header.Add("Content-type", "application/x-www-form-urlencoded")
 	request.Header.Add("Authorization", fmt.Sprintf("Basic %s", base64.StdEncoding.EncodeToString([]byte(fmt.Sprintf("%s:%s", clientId, clientSecret)))))
 
 	resp, err := client.Do(request)
 	if err != nil {
-		return accessToken, err
+		return "", err
 	}
 	defer resp.Body.Close()
 
 	var result map[string]interface{}
 	err = json.NewDecoder(resp.Body).Decode(&result)
 	if err != nil {
-		return accessToken, nil
+		return "", err
 	}
 
-	accessToken = fmt.Sprintf("%s", result["access_token"])
+	if result["error"] != nil {
+		return "", errors.New(fmt.Sprintf("%s", result["error_description"]))
+	}
+
+	accessToken := fmt.Sprintf("%s", result["access_token"])
 	return accessToken, nil
 }
 
