@@ -1,10 +1,10 @@
 package spotify
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
-	"encoding/json"
 )
 
 type DevicesPayload struct {
