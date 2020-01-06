@@ -68,4 +68,4 @@ client.Play(result.Tracks.Items[0])
 - [ ] Playlists
 - [x] Search
 - [ ] Tracks
-- [ ] Users Profile
+- [x] Users Profile

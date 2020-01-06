@@ -1,13 +1,13 @@
 package spotify
 
 import (
-	"os"
 	"testing"
+	"os"
 
 	_ "github.com/joho/godotenv/autoload"
 )
 
-func TestRefreshToken(t *testing.T) {
+func TestUserProfile(t *testing.T) {
 	client := Client{
 		ClientId:     os.Getenv("CLIENTID"),
 		ClientSecret: os.Getenv("CLIENTSECRET"),
@@ -17,5 +17,14 @@ func TestRefreshToken(t *testing.T) {
 	err := client.RefreshAccessToken()
 	if err != nil {
 		t.Errorf("Auth Error: %v\n", err)
+	}
+
+	user, err := client.GetCurrentUserProfile()
+	if err != nil {
+		t.Errorf("User Error: %v\n", err)
+	}
+
+	if user.DisplayName != "Tobi Ola" {
+		t.Errorf("User Error: %v\n", "User data is incorrect or missing")
 	}
 }

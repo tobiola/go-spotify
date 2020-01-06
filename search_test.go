@@ -2,12 +2,10 @@ package spotify
 
 import (
 	"testing"
-	//	"log"
-	//	"github.com/joho/godotenv"
 	"os"
-)
 
-import _ "github.com/joho/godotenv/autoload"
+	_ "github.com/joho/godotenv/autoload"
+)
 
 func TestSearch(t *testing.T) {
 	client := Client{
