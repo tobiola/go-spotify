@@ -1,7 +1,8 @@
 # Spotify API Wrapper - Golang
 
-![Version: 1.0.0](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)
+
 [![GoDoc](https://godoc.org/github.com/tobiola/Spotify?status.svg)](https://godoc.org/github.com/tobiola/Spotify)
+[![Build Status](https://travis-ci.org/tobiola/Spotify.svg?branch=master)](https://travis-ci.org/tobiola/Spotify)
 
 ```
 go get github.com/tobiola/Spotify
