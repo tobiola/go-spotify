@@ -2,7 +2,7 @@
 
 
 [![GoDoc](https://godoc.org/github.com/tobiola/Spotify?status.svg)](https://godoc.org/github.com/tobiola/Spotify)
-[![Build Status](https://travis-ci.org/tobiola/Spotify.svg?branch=master)](https://travis-ci.org/tobiola/Spotify)
+[![Build Status](https://travis-ci.com/tobiola/Spotify.svg?branch=master)](https://travis-ci.com/tobiola/Spotify)
 
 ```
 go get github.com/tobiola/Spotify
