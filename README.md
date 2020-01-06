@@ -49,13 +49,15 @@ client.Pause()
 ### Search
 
 ````Go
-result, _ := client.Search("bangers")
+options := spotify.SearchOptions{Query: q, Type: "track"}
+result, _ := client.Search(options)
+
 client.Play(result.Tracks.Items[0])
 ````
 
 ### Progress
 - [x] Authentication
-- [x] Albums
+- [ ] Albums
 - [ ] Browse
 - [ ] Follow
 - [ ] Library
