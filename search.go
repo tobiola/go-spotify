@@ -8,13 +8,15 @@ import (
 	"github.com/google/go-querystring/query"
 )
 
-type SearchResponse struct {
+// Data structure for a response from a search
+type SearchResult struct {
 	Tracks    TrackPaging    `json:"tracks"`
 	Albums    AlbumPaging    `json:"albums"`
 	Artists   ArtistPaging   `json:"artists"`
 	Playlists PlaylistPaging `json:"playlists"`
 }
 
+//
 type SearchOptions struct {
 	// Required.
 	// Search query keywords and optional field filters and operators.
@@ -56,26 +58,26 @@ type SearchOptions struct {
 }
 
 // Search for an item
-func (c *Client) Search(options SearchOptions) (SearchResponse, error) {
+func (c *Client) Search(options SearchOptions) (SearchResult, error) {
 	if options.Query == "" {
-		return SearchResponse{}, errors.New("Query must not be empty")
+		return SearchResult{}, errors.New("Query must not be empty")
 	}
 
 	v, err := query.Values(options)
 	if err != nil {
-		return SearchResponse{}, err
+		return SearchResult{}, err
 	}
 
 	url := fmt.Sprintf("https://api.spotify.com/v1/search?%s", v.Encode())
 	bytes, err := c.get(url, nil)
 	if err != nil {
-		return SearchResponse{}, err
+		return SearchResult{}, err
 	}
 
-	result := SearchResponse{}
+	result := SearchResult{}
 	err = json.Unmarshal(bytes, &result)
 	if err != nil {
-		return SearchResponse{}, err
+		return SearchResult{}, err
 	}
 
 	return result, nil

@@ -1,10 +1,10 @@
 package spotify
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
-	"errors"
-	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"time"
@@ -47,7 +47,7 @@ func (c *Client) fetch(method string, url string, body io.Reader) ([]byte, error
 	}
 	defer resp.Body.Close()
 
-	bytes, err := ioutil.ReadAll(resp.Body) 
+	bytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return []byte{}, err
 	}

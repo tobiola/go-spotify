@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-//	"log"
+	//	"log"
 	"time"
 )
 
@@ -87,7 +87,6 @@ func GetClientFromCallback(requestUrl *url.URL, redirectUri string, clientId str
 	if resp.StatusCode != 200 {
 		return c, errors.New("Invalid Request")
 	}
-	
 
 	/*
 		request, err = http.NewRequest("GET", "https://api.spotify.com/v1/me", strings.NewReader(url.Values{}.Encode()))
