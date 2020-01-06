@@ -50,7 +50,7 @@ client.Pause()
 ### Search
 
 ````Go
-options := spotify.SearchOptions{Query: q, Type: "track"}
+options := spotify.SearchOptions{Query: "hotline bling", Type: "track"}
 result, _ := client.Search(options)
 
 client.Play(result.Tracks.Items[0])
