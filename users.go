@@ -1,8 +1,8 @@
 package spotify
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 )
 
 func (c *Client) GetCurrentUserProfile() (UserPrivate, error) {

@@ -1,8 +1,8 @@
 package spotify
 
 import (
-	"testing"
 	"os"
+	"testing"
 
 	_ "github.com/joho/godotenv/autoload"
 )
