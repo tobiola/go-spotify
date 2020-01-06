@@ -6,8 +6,10 @@
 
 A Lightweight Spotify API Wrapper For Golang
 
+## Usage
+
 ```
-go get github.com/tobiola/spotify
+import "github.com/tobiola/spotify"
 ```
 
 ## Getting started
