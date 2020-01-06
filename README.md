@@ -1,9 +1,10 @@
-# Spotify API Wrapper - Golang
-
+# spotify
 
 [![GoDoc](https://godoc.org/github.com/tobiola/spotify?status.svg)](https://godoc.org/github.com/tobiola/spotify)
 [![Build Status](https://travis-ci.com/tobiola/spotify.svg?branch=master)](https://travis-ci.com/tobiola/spotify)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tobiola/spotify)](https://goreportcard.com/report/github.com/tobiola/spotify)
+
+A Lightweight Spotify API Wrapper For Golang
 
 ```
 go get github.com/tobiola/spotify
